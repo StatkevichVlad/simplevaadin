@@ -18,12 +18,14 @@ public class UserServiceImpl implements UserService {
         return repository.findAll();
     }
 
+
     public List<UserEntity> findByName(String filterText){
+
         if (filterText == null || filterText.isEmpty()){
             return repository.findAll();
         }
         else  {
-            return repository.searchByName(filterText);
+            return repository.findByName(filterText);
         }
     }
 
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
             return repository.findAll();
         }
         else  {
-            return repository.searchByPhone(Integer.parseInt(filterText));
+            return repository.findByPhone(Integer.parseInt(filterText));
         }
     }
 
@@ -41,7 +43,7 @@ public class UserServiceImpl implements UserService {
             return repository.findAll();
         }
         else  {
-            return repository.searchByAddress(filterText);
+            return repository.findByAddress(filterText);
         }
     }
 

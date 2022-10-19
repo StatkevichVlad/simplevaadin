@@ -16,13 +16,11 @@ import project.vaadin.backend.service.impl.UserServiceImpl;
 public class MainView extends VerticalLayout {
     @Autowired
     private UserServiceImpl userServiceImpl;
-
-
-    Grid<UserEntity> grid = new Grid<>(UserEntity.class);
-     TextField filterTextByName = new TextField();
-     TextField filterTextByPhone = new TextField();
-
-    TextField filterTextByAddress = new TextField();
+    
+    private Grid<UserEntity> grid = new Grid<>(UserEntity.class);
+    private TextField filterTextByName = new TextField();
+    private TextField filterTextByPhone = new TextField();
+    private TextField filterTextByAddress = new TextField();
 
 
     public MainView(UserServiceImpl userServiceImpl){
@@ -45,6 +43,8 @@ public class MainView extends VerticalLayout {
     private void updateListByName(){
         grid.setItems(userServiceImpl.findByName(filterTextByName.getValue()));
     }
+
+    ///pr1
     private void updateListByPhone(){
         grid.setItems(userServiceImpl.findAllByPhone(filterTextByPhone.getValue()));
     }
