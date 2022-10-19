@@ -9,13 +9,13 @@ import project.vaadin.backend.entity.UserEntity;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import project.vaadin.backend.service.UserService;
+import project.vaadin.backend.service.impl.UserServiceImpl;
 
 
 @Route("")
 public class MainView extends VerticalLayout {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
 
     Grid<UserEntity> grid = new Grid<>(UserEntity.class);
@@ -25,8 +25,8 @@ public class MainView extends VerticalLayout {
     TextField filterTextByAddress = new TextField();
 
 
-    public MainView(UserService userService){
-        this.userService = userService;
+    public MainView(UserServiceImpl userServiceImpl){
+        this.userServiceImpl = userServiceImpl;
         addClassName("list-view");
         setSizeFull();
 
@@ -40,21 +40,21 @@ public class MainView extends VerticalLayout {
     }
 
     private  void updateList(){
-        grid.setItems(userService.findAll());
+        grid.setItems(userServiceImpl.findAll());
     }
     private void updateListByName(){
-        grid.setItems(userService.findAll(filterTextByName.getValue()));
+        grid.setItems(userServiceImpl.findByName(filterTextByName.getValue()));
     }
     private void updateListByPhone(){
-        grid.setItems(userService.findAllByPhone(filterTextByPhone.getValue()));
+        grid.setItems(userServiceImpl.findAllByPhone(filterTextByPhone.getValue()));
     }
 
     private void updateListByAddress(){
-        grid.setItems(userService.findAllByAddress(filterTextByAddress.getValue()));
+        grid.setItems(userServiceImpl.findAllByAddress(filterTextByAddress.getValue()));
     }
 
     private void configureFilter(){
-        userService.findAll();
+        userServiceImpl.findAll();
 
          filterTextByName.setPlaceholder("Filter by name");
          filterTextByName.setClearButtonVisible(true);

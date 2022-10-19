@@ -6,21 +6,21 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
-import project.vaadin.backend.service.UserService;
+import project.vaadin.backend.service.impl.UserServiceImpl;
 
 @Route("registration")
 public class RegistrationView extends VerticalLayout {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     private TextField textFieldName;
     private TextField textFieldPhone;
     private TextField textFieldAddress;
     private Text textFieldRegistrationAnswer;
 
 
-    public RegistrationView(UserService userService){
-        this.userService = userService;
+    public RegistrationView(UserServiceImpl userServiceImpl){
+        this.userServiceImpl = userServiceImpl;
 
          textFieldName = new TextField();
          textFieldPhone = new TextField();
@@ -41,7 +41,7 @@ public class RegistrationView extends VerticalLayout {
     }
 
     private void addNewUser(String textFieldName, Integer textFieldPhone , String textFieldAddress){
-        userService.addUser(textFieldName,textFieldPhone,textFieldAddress);
+        userServiceImpl.addUser(textFieldName,textFieldPhone,textFieldAddress);
         textFieldRegistrationAnswer.setText("Registration success");
 
     }
