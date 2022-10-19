@@ -6,6 +6,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
+import project.vaadin.backend.component.mapper.UserMapper;
+import project.vaadin.backend.component.mapper.impl.UserMapperImpl;
+import project.vaadin.backend.model.dto.UserDto;
 import project.vaadin.backend.service.impl.UserServiceImpl;
 
 @Route("registration")
@@ -18,6 +21,7 @@ public class RegistrationView extends VerticalLayout {
     private TextField textFieldAddress;
     private Text textFieldRegistrationAnswer;
 
+    private UserDto userDto = new UserDto();
 
     public RegistrationView(UserServiceImpl userServiceImpl){
         this.userServiceImpl = userServiceImpl;
@@ -41,7 +45,13 @@ public class RegistrationView extends VerticalLayout {
     }
 
     private void addNewUser(String textFieldName, Integer textFieldPhone , String textFieldAddress){
-        userServiceImpl.addUser(textFieldName,textFieldPhone,textFieldAddress);
+        UserMapper userMapper = new UserMapperImpl();
+        userDto.setName(textFieldName);
+        userDto.setPhone(textFieldPhone);
+        userDto.setAddress(textFieldAddress);
+
+        userServiceImpl.addUser(userMapper.userDtoToUserEntity(userDto));
+
         textFieldRegistrationAnswer.setText("Registration success");
 
     }

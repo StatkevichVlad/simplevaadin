@@ -1,6 +1,6 @@
 package project.vaadin.backend.service.impl;
 
-import project.vaadin.backend.entity.UserEntity;
+import project.vaadin.backend.model.entity.UserEntity;
 import project.vaadin.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,12 +45,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void addUser(String textFieldName, Integer textFieldPhone , String textFieldAddress){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setName(textFieldName);
-        userEntity.setPhone(textFieldPhone);
-        userEntity.setAddress(textFieldAddress);
-
+    public void addUser(UserEntity userEntity){
         repository.save(userEntity);
     }
 }

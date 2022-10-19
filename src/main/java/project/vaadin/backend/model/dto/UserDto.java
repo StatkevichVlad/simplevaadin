@@ -1,25 +1,10 @@
-package project.vaadin.backend.entity;
+package project.vaadin.backend.model.dto;
 
-import javax.persistence.*;
+public class UserDto {
 
-@Entity
-@Table(name = "users")
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String name;
     private int phone;
     private String address;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -44,4 +29,6 @@ public class UserEntity {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 }
